@@ -79,6 +79,22 @@ private byte[] txHash;
 private int index;
 
 
+/********************************************* 
+Jos komentara :)
+Ako je transakcija valida onda se njeni delovi ubacuju u UtxoPool
+Ubacuje se tako sto se ubacuje svaki ouput i UTXO za taj output.
+UTXO i ouput se ponasaju kao key value par. UTXO se pravi tako da je:
+	txHash = hash cele transakcije koja je valida, znaci ne prevTxHash od Inputa nego hash Transkacije
+	index = index outputa za koji se pravi taj UTXO
+
+Sem toga iz poola se vade svi UTXO koji su izkorisceni kao inputi za ovu transakciju.
+Odnosno, za svaki Input iz ove trasakcije se uzima Input.prevTxHash i Input.outputIndex 
+i pravi se UTXO i taj UTXO se vadi iz pool-a.
+*/
+
+
+
+
 
 
 
