@@ -15,17 +15,21 @@ function UTXO(txHash, index) {
      * {@code txHash} arrays with equal contents and equal {@code index} values
      */
 	this.equals = function (other) {
-		if (other == null) {
-			return false;
-		}
-		if (!(other instanceof UTXO)) {
+		if (other == null || !(other instanceof UTXO)) {
 			return false;
 		}
 
 		otherHash = other.getTxHash();
 		otherIndex = other.getIndex();
-		if (otherHash.length !== txHash.length || ohterIndex !== index) {
+		if (otherHash.length !== txHash.length || otherIndex !== ind) {
             return false;
 		}
+
+		for (int i = 0; i < otherHash.length; i++) {
+            if (otherHash[i] !== txHash[i])
+                return false;
+        }
+
+        return true;
 	}
 }
