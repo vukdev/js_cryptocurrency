@@ -22,10 +22,9 @@ function UTXO(txHash, index) {
 			return false;
 		}
 
-		utxo = other;
-		hash = utxo.getTxHash();
-		in = utxo.getIndex();
-		if (hash.length !== txHash.length || index !== in) {
+		otherHash = other.getTxHash();
+		otherIndex = other.getIndex();
+		if (otherHash.length !== txHash.length || ohterIndex !== index) {
             return false;
 		}
 	}
