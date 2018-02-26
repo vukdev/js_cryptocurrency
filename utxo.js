@@ -41,4 +41,33 @@ function UTXO(txHash, index) {
         hash = hash * 31 + hashCode().value(txHash);
         return hash;
 	}
+
+	this.compareTo = function (utxo) {
+		var utxoHash = utxo.getTxHash;
+		var utxoIndex = utxo.getIndex;
+
+		if (utxoIndex > index) {
+			return -1;
+		} else if (utxoIndex < index) {
+			return 1;
+		}  else {
+			var len1 = txHash.length;
+			var len2 = utxoHash.length;
+			if (len2 > len1) {
+				return -1;
+			} else if (len2 < len1) {
+				return 1;
+			} else {
+				for (var i = 0; i < len1; i++) {
+					if (utxoHash[i] > txHash[i]) {
+						return -1;
+					} else if (utxoHash[i] < thXhas[i]) {
+						return 1;
+					}
+
+					return 0;
+				}
+			}
+		}
+	}
 }
