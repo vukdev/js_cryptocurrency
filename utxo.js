@@ -19,17 +19,21 @@ function UTXO(txHash, index) {
 			return false;
 		}
 
-		otherHash = other.getTxHash();
-		otherIndex = other.getIndex();
+		var otherHash = other.getTxHash();
+		var otherIndex = other.getIndex();
 		if (otherHash.length !== txHash.length || otherIndex !== ind) {
             return false;
 		}
 
-		for (int i = 0; i < otherHash.length; i++) {
+		for (var i = 0; i < otherHash.length; i++) {
             if (otherHash[i] !== txHash[i])
                 return false;
         }
 
         return true;
+	}
+
+	this.hashCode = function () {
+		
 	}
 }
