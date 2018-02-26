@@ -1,3 +1,5 @@
+require(['hashcode']);
+
 function UTXO(txHash, index) {
 	var txHash = txHash;
 	var index = index;
@@ -34,6 +36,9 @@ function UTXO(txHash, index) {
 	}
 
 	this.hashCode = function () {
-		
+		var hash = 1;
+        hash = hash * 17 + index;
+        hash = hash * 31 + hashCode().value(txHash);
+        return hash;
 	}
 }
