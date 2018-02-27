@@ -1,11 +1,22 @@
-function UTXOPool(uPool) {
-	var H;
+define(['node_modules/hashmap/hashmap'], function (HashMap) {
 
-	if (uPool instanceof UTXOPool) {
-		H = uPool.map(function (item) {
-			return Object.assign({}, item);
-		});
-	} else {
-		H = [];
+	function UTXOPool(uPool) {
+		var H;
+
+		if (uPool instanceof UTXOPool) {
+			H = new HashMap(uPool.getHashMap());
+		} else {
+			H = new HashMap();
+		}
+
+		this.getHashMap = function () {
+			return H;
+		}
+
+		this.addUTXO = function (utxo, txOut) {
+			
+		}
+
 	}
-}
+
+});
