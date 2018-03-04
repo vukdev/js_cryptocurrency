@@ -2,32 +2,35 @@
 <head>
 	<script src="require.js"></script>
 	<!-- <script src="bower_components/crypto-js/crypto-js.js"></script> -->
-	<script> 
-		// require(['hashcode']);
-		require(['./utxo'], function (UTXO) {
-			utxo = new UTXO('asdbadbasdb', 0);	
-			console.log(utxo.hashCode());
-		});
-		require(['utxoPool'], function (utxoPool) {
+	<script>
+		require(['utxo', 'utxoPool', 'node_modules/crypto-js/crypto-js'], function (utxo, UTXOPool, cryptoJs) {
+			var hash1 = cryptoJs.SHA256('123').toString();
+            var index1 = 0;
+		    var u1 = new utxo(hash1, index1);
+            var u2 = new utxo(hash1, index1);
 
-		});
+            var index2 = 1;
+            var u3 = new utxo(hash1, index2);
 
-		require(['node_modules/hashmap/hashmap'], function (HashMap) {
-			var H = new HashMap();
-			var obj = {'x':1};
-			console.log(obj);	
-			H.set(obj,1).set(2,2);
 
- 			var H2 = new HashMap(H);
- 			obj.x = 3;
-			console.log(obj);
-			console.log(H.get(obj));
-			console.log(H2.get(obj));
-		});
+            console.log(u1.hashCode());
+            console.log(u2.hashCode());
+            console.log(u1.equals(u2));
+            console.log(u1.equals(u3));
 
-		require(['node_modules/crypto-js/crypto-js'], function (cryptoJs) {
-			console.log(cryptoJs.SHA256('123').toString());
-		});
+            var output1 = 5;
+            var output2 = 6;
+
+            var utxoPool = new UTXOPool();
+            utxoPool.addUTXO(u1, output1);
+            utxoPool.addUTXO(u2, output2); // ne dozvoljavamo dodavanje vec postojeceg key
+            utxoPool.addUTXO(u3, output2);
+            utxoPool.removeUTXO(u2);
+
+            console.log(utxoPool.getTxOutput(u1));
+            console.log(utxoPool.getAllUTXO());
+
+        });
 	</script> 
 </head>
 <body></body>
