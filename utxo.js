@@ -1,16 +1,18 @@
+/* global define */
 define(['hashcode'], function (hashCode) {
+	'use strict';
 
-	function UTXO(txHash, index) {
-		var txHash = txHash;
-		var index = index;
+	function UTXO(txH, ind) {
+		var txHash = txH;
+		var index = ind;
 
 		this.getTxHash = function () {
 			return txHash;
-		}
+		};
 
 		this.getIndex = function () {
 			return index;
-		}
+		};
 
 		/**
 	     * Compares this UTXO to the one specified by {@code other}, considering them equal if they have
@@ -28,19 +30,20 @@ define(['hashcode'], function (hashCode) {
 			}
 
 			for (var i = 0; i < otherHash.length; i++) {
-	            if (otherHash[i] !== txHash[i])
-	                return false;
+	            if (otherHash[i] !== txHash[i]) {
+                    return false;
+				}
 	        }
 
 	        return true;
-		}
+		};
 
 		this.hashCode = function () {
 			var hash = 1;
 	        hash = hash * 17 + index;
 	        hash = hash * 31 + hashCode().value(txHash);
 	        return hash;
-		}
+		};
 
 		this.compareTo = function (utxo) {
 			var utxoHash = utxo.getTxHash;
@@ -61,7 +64,7 @@ define(['hashcode'], function (hashCode) {
 					for (var i = 0; i < len1; i++) {
 						if (utxoHash[i] > txHash[i]) {
 							return -1;
-						} else if (utxoHash[i] < thXhas[i]) {
+						} else if (utxoHash[i] < txHash[i]) {
 							return 1;
 						}
 
@@ -69,7 +72,7 @@ define(['hashcode'], function (hashCode) {
 					}
 				}
 			}
-		}
+		};
 	}
 
 	return UTXO;
