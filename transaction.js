@@ -33,7 +33,7 @@ define(['hashcode'], function (hashCode) {
 			this.address = addr;
 		};
 
-		var byte;
+		var hash;
         var inputs;
         var outputs;
 
@@ -43,9 +43,25 @@ define(['hashcode'], function (hashCode) {
             inputs = [];
             outputs = [];
 		} else if (tx instanceof Transaction) {
-			// clone arrays
+			inputs = tx.getInputs.map(function (item) {
+                return Object.assign({}, item);
+            });
+            outputs = tx.getOutputs.map(function (item) {
+                return Object.assign({}, item);
+            });
+            hash =  tx.getHash().slice(0, tx.getHash().length);
 		}
 
+        this.getInputs = function () {
+            return inputs;
+        };
 
+        this.getOutputs = function () {
+            return outputs;
+        };
+        
+        this.getHash = function () {
+            return hash;
+        };
 	};
 });
